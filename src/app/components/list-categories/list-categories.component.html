@@ -1,0 +1,38 @@
+<br> 
+<br>
+<br>
+<main role="main" > <!-- class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"-->
+<div class="example-container mat-elevation-z8">
+  
+    <div class="example-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let category"> {{category.id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="categoryName">
+        <th mat-header-cell *matHeaderCellDef> Category Name </th>
+        <td mat-cell *matCellDef="let category"> {{category.categoryName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="parent">
+        <th mat-header-cell *matHeaderCellDef> Parent </th>
+        <td mat-cell *matCellDef="let category"> {{category.parent}} </td>
+      </ng-container>
+      <ng-container matColumnDef="propertiesLength">
+        <th mat-header-cell *matHeaderCellDef> Properties Length </th>
+        <td mat-cell *matCellDef="let category"> {{category.properties.length}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator #paginator
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div> 
+</main>

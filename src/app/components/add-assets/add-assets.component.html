@@ -1,0 +1,39 @@
+<br>
+<br>
+
+<div class="btn-group" dropdown style="margin-right: 10px;">
+    <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-basic">
+        {{categoryName}} <span class="caret"></span>
+    </button>
+    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+        role="menu" aria-labelledby="button-basic">
+        <li role="menuitem"><a class="dropdown-item" *ngFor="let category of categories" (click)="selectSub(category.categoryName)">{{category.categoryName}}</a></li>
+    </ul>
+</div>
+<div class="btn-group" dropdown *ngIf="subcategoryShow" style="margin-right: 10px;">
+    <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-basic">
+        {{subCategoryName}} <span class="caret"></span>
+    </button>
+    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+        role="menu" aria-labelledby="button-basic">
+        <li role="menuitem"><a class="dropdown-item" *ngFor="let sub of subcategories" (click)="selectSubCategory(sub.categoryName)">{{sub.categoryName}}</a></li>
+    </ul>
+</div>
+
+<button class="btn btn-primary" style="margin-right: 10px;" (click)="addAssetBtn()" *ngIf="addBtnShow">Add Asset</button>
+
+<div *ngIf="addAssetForm">
+
+    <div class="container">
+        <form *ngIf="formGroup" class="form-horizontal" [formGroup]="formGroup" (ngSubmit)="onSave()">
+            <dynamic-bootstrap-form [model]="formModel"
+                                    [layout]="formLayout"
+                                    [group]="formGroup">
+            </dynamic-bootstrap-form>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+          
+</div>

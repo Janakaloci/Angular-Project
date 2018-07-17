@@ -1,0 +1,95 @@
+<br> 
+<br>
+<br>
+<main role="main" > <!-- class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"-->
+  <div class="row" style="margin-bottom: 10px;">
+    <div class="col-md-12 d-flex justify-content-end">
+        <button class="btn btn-primary" *ngIf="reverseBtn" (click)="sortData()">Sort by Newest</button>
+        <button class="btn btn-primary" *ngIf="unreverseBtn" (click)="unSortData()">Sort by Oldest</button>
+    </div>
+  </div>
+  <div class="example-container mat-elevation-z8">
+    <div class="example-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let asset"> {{asset.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="model">
+        <th mat-header-cell *matHeaderCellDef> Model </th>
+        <td mat-cell *matCellDef="let asset"> {{asset.model}} </td>
+      </ng-container>
+      <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef> Asset Category </th>
+        <td mat-cell *matCellDef="let asset"> {{asset.category}} </td>
+      </ng-container>
+      <ng-container matColumnDef="subcategory">
+        <th mat-header-cell *matHeaderCellDef> Asset Subcategory </th>
+        <td mat-cell *matCellDef="let asset"> {{asset.subcategory}} </td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let asset"> {{asset.description}} </td>
+      </ng-container>
+      <ng-container matColumnDef="brand">
+        <th mat-header-cell *matHeaderCellDef> Brand </th>
+        <td mat-cell *matCellDef="let asset"> {{asset.brand}} </td>
+      </ng-container>
+      <ng-container matColumnDef="assetStatus">
+        <th mat-header-cell *matHeaderCellDef> Asset Status </th>
+        <td mat-cell *matCellDef="let asset"> {{asset.assetStatus}} </td>
+      </ng-container>
+      <ng-container matColumnDef="assetCondition">
+        <th mat-header-cell *matHeaderCellDef> Asset Condition </th>
+        <td mat-cell *matCellDef="let asset"> {{asset.assetCondition}} </td>
+      </ng-container>
+      <ng-container matColumnDef="tags">
+        <th mat-header-cell *matHeaderCellDef> Tags </th>
+        <td mat-cell *matCellDef="let asset"> {{asset.tags.toString()}} </td>
+      </ng-container>
+      <ng-container matColumnDef="showAsset">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td><button  *matCellDef="let asset" mat-raised-button color="primary" (click)="showAssetDetail(asset, assetDetail)">View</button></td>
+      </ng-container>
+      <ng-container matColumnDef="deleteAsset">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td><button  *matCellDef="let asset" mat-raised-button color="danger" (click)="deleteAsset(asset.id)">Delete</button></td>
+      </ng-container>
+      <ng-container matColumnDef="editAsset">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td><button  *matCellDef="let asset" mat-raised-button color="danger" (click)="goToEdit(asset.id)">Edit</button></td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator #paginator
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+<ng-template #assetDetail let-c="close">
+  <div class="modal-header">
+    <h4 class="modal-title" style="color:black;">Asset Detail</h4>
+  </div>
+  <div class="modal-body">
+    <p><b>Asset ID: </b> {{asset.id}}</p>
+    <p><b>Name: </b> {{asset.name}}</p>
+    <p><b>Model: </b> {{asset.model}}</p>
+    <p><b>Category: </b> {{asset.category}}</p>
+    <p><b>Subcategory: </b> {{asset.subcategory}}</p>
+    <p><b>Description: </b> {{asset.description}}</p>
+    <p><b>Brand: </b> {{asset.brand}}</p>
+    <p><b>Asset Status: </b> {{asset.assetStatus}}</p>
+    <p><b>Asset Condition: </b> {{asset.assetCondition}}</p>
+    <p><b>Tags: </b> {{asset.tags.toString()}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-light" (click)="c('Close click')" style="cursor: pointer; background-color: black">Close</button>
+  </div>
+</ng-template> 
+</main>
