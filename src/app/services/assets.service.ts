@@ -27,13 +27,8 @@ export class AssetsService {
       return res;
     })
   }
-  updateAsset(id: String, model: String, mobrand: String, installationDate: Date){
-    return this.http.put(`http://street-asset-manager-api.herokuapp.com/assets`, {params: {
-      assetId: id,
-      model,
-      mobrand,
-      installationDate
-    }}).map((res: any) => {
+  updateAsset(asset: any){
+    return this.http.put(`http://street-asset-manager-api.herokuapp.com/assets`, asset).map(res => {
       return res;
     })
   }

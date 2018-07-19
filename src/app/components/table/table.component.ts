@@ -48,17 +48,19 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   deleteAsset(id: String){
-    this.assetsService.deleteAssets(id).subscribe(asset => {
-      this.assetsService.getAssets().subscribe(assets => {
-        this.assets = assets;
+    if(confirm("Are you sure you want to delete this Asset ?")){
+      this.assetsService.deleteAssets(id).subscribe(asset => {
         this.assetsService.getAssets().subscribe(assets => {
           this.assets = assets;
-          this.dataSource = new MatTableDataSource<any>(this.assets);
-          this.dataSource.paginator = this.paginator;
-        });
-      }) 
-      this.flashMessages.show("Asset Deleted", {cssClass: 'alert-success', timeout: 3000});
-    })
+          this.assetsService.getAssets().subscribe(assets => {
+            this.assets = assets;
+            this.dataSource = new MatTableDataSource<any>(this.assets);
+            this.dataSource.paginator = this.paginator;
+          });
+        }) 
+        this.flashMessages.show("Asset Deleted", {cssClass: 'alert-success', timeout: 3000});
+      })
+    }
   }
 
   goToEdit(id: String){

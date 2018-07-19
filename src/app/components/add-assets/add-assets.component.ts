@@ -128,6 +128,7 @@ export class AddAssetsComponent implements OnInit {
             }),
             new DynamicFormGroupModel({
               id: 'specificProperties',
+              legend: "Specific Properties",
               group: [
                 
               ]
@@ -154,10 +155,9 @@ export class AddAssetsComponent implements OnInit {
 
       specProperties[0].group = [];
 
-      console.log(schemaNew)
+      console.log(schemaNew);
   
       schemaNew.map(cat => {
-        console.log(cat);
         if(cat.propertyType === "String"){
           if(cat.propertyName === 'category'){
             this.SAMPLE_FORM_MODEL[0].group.push(
@@ -465,8 +465,6 @@ export class AddAssetsComponent implements OnInit {
               asset.specificProperties[k] = asset.specificProperties[k]
             }
         }
-
-        console.log(asset);
 
         this.assetService.addAsset(asset).subscribe(asset => {
           console.log(asset);
