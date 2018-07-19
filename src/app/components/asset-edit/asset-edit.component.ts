@@ -22,7 +22,7 @@ export class AssetEditComponent implements OnInit {
       this.asset = asset;
     })
   }
-
+  
   onSubmit({value, valid}:{value:any, valid:boolean}){    
     if(!valid){
       this.router.navigate(['/asset-edit/' + this.assetId]);

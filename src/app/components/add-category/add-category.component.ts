@@ -217,10 +217,10 @@ export class AddCategoryComponent implements OnInit {
           ]
         })
       ];
-
       this.formModel = this.SAMPLE_FORM_MODEL;
 
       this.formGroup = this.formService.createFormGroup(this.formModel);
+      console.log(this.formGroup.value);
 
       this.arrayControl = this.formGroup.get("bootstrapFormGroup1").get("properties") as FormArray;
       this.arrayModel = this.formService.findById("properties", this.formModel) as DynamicFormArrayModel;

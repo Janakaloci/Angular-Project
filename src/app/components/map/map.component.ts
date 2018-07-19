@@ -12,7 +12,6 @@ export class MapComponent implements OnInit {
   markers: any[] = [];
   googleMaps:any;
   options:any;
-  polyline: any;
   constructor(private elementRef: ElementRef,
               private assetsService: AssetsService) { }
 
@@ -50,8 +49,10 @@ export class MapComponent implements OnInit {
           })
           .bindPopup(`
             <div align='center'>
+            <p style='font-size:15px'>Asset Name: ${asset.name}</p>
               <p style='font-size:15px'>Asset Status: ${asset.assetStatus}</p>
               <p style='font-size:15px'>Asset Condition: ${asset.assetCondition}</p>
+              <p style='font-size:15px'>Asset Description: ${asset.description}</p>
             </div>
           `)
           )
@@ -59,5 +60,4 @@ export class MapComponent implements OnInit {
       }
     })
   }
-
 }

@@ -102,8 +102,6 @@ export class AddAssetsComponent implements OnInit {
         results[0].properties.push(res);
       });
 
-      console.log(noDuplicates);
-
       schemaNew = results[0].properties;
   
       this.SAMPLE_FORM_MODEL = [
@@ -154,9 +152,12 @@ export class AddAssetsComponent implements OnInit {
   
       geoinfo[0].group[0].group = [];
 
-      specProperties[0].group = []
+      specProperties[0].group = [];
+
+      console.log(schemaNew)
   
       schemaNew.map(cat => {
+        console.log(cat);
         if(cat.propertyType === "String"){
           if(cat.propertyName === 'category'){
             this.SAMPLE_FORM_MODEL[0].group.push(
@@ -464,7 +465,9 @@ export class AddAssetsComponent implements OnInit {
               asset.specificProperties[k] = asset.specificProperties[k]
             }
         }
-      
+
+        console.log(asset);
+
         this.assetService.addAsset(asset).subscribe(asset => {
           console.log(asset);
           this.router.navigate(['/']);
@@ -475,5 +478,4 @@ export class AddAssetsComponent implements OnInit {
       }
     }
   }
-
 }
