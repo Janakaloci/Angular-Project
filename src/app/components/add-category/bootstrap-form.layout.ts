@@ -6,7 +6,7 @@ export const BOOTSTRAP_FORM_LAYOUT = {
         },
         grid: {
             control: "col-sm-9",
-            errors: "col-sm-offset-3 col-sm-9",
+            errors: "col-sm-offset-3 col-sm-9 alert-danger errorMessage",
             label: "col-sm-3"
         }
     },
@@ -18,6 +18,7 @@ export const BOOTSTRAP_FORM_LAYOUT = {
 
         grid: {
             control: "col-sm-9",
+            errors: "col-sm-offset-3 col-sm-9 alert-danger errorMessage",
             label: "col-sm-3"
         }
     },
@@ -28,6 +29,7 @@ export const BOOTSTRAP_FORM_LAYOUT = {
         },
         grid: {
             control: "col-sm-9",
+            errors: "col-sm-offset-3 col-sm-9 alert-danger errorMessage",
             label: "col-sm-3"
         }
     },
@@ -39,6 +41,7 @@ export const BOOTSTRAP_FORM_LAYOUT = {
 
         grid: {
             control: "col-sm-9",
+            errors: "col-sm-offset-3 col-sm-9 alert-danger errorMessage",
             label: "col-sm-3"
         }
     },
@@ -49,7 +52,7 @@ export const BOOTSTRAP_FORM_LAYOUT = {
         },
         grid: {
             control: "col-sm-9",
-            errors: "col-sm-offset-3 col-sm-9",
+            errors: "col-sm-offset-3 col-sm-9 alert-danger errorMessage",
             label: "col-sm-3"
         }
     },
@@ -60,6 +63,7 @@ export const BOOTSTRAP_FORM_LAYOUT = {
         },
         grid: {
             control: "col-sm-9",
+            errors: "col-sm-offset-3 col-sm-9 alert-danger errorMessage",
             label: "col-sm-3"
         }
     },
@@ -71,6 +75,7 @@ export const BOOTSTRAP_FORM_LAYOUT = {
 
         grid: {
             control: "col-sm-9",
+            errors: "col-sm-offset-3 col-sm-9 alert-danger errorMessage",
             label: "col-sm-3"
         }
     },
@@ -82,6 +87,7 @@ export const BOOTSTRAP_FORM_LAYOUT = {
 
         grid: {
             control: "col-sm-9",
+            errors: "col-sm-offset-3 col-sm-9 alert-danger errorMessage",
             label: "col-sm-3"
         }
     },
@@ -92,7 +98,7 @@ export const BOOTSTRAP_FORM_LAYOUT = {
         },
         grid: {
             control: "col-sm-9",
-            errors: "col-sm-offset-3 col-sm-9",
+            errors: "col-sm-offset-3 col-sm-9 alert-danger errorMessage",
             label: "col-sm-3"
         }
     },

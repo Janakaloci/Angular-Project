@@ -154,8 +154,6 @@ export class AddAssetsComponent implements OnInit {
       geoinfo[0].group[0].group = [];
 
       specProperties[0].group = [];
-
-      console.log(schemaNew);
   
       schemaNew.map(cat => {
         if(cat.propertyType === "String"){
@@ -165,13 +163,7 @@ export class AddAssetsComponent implements OnInit {
                 id: cat.propertyName,
                 label: cat.propertyName,
                 placeholder: 'Enter ' + cat.propertyName,
-                value: categoryName,
-                validators: {
-                  required: null,
-                }, 
-                errorMessages: {
-                  required: "{{ label }} is required"
-                }
+                value: categoryName
               })
             )
           } else if (cat.propertyName === 'subcategory'){
@@ -180,14 +172,8 @@ export class AddAssetsComponent implements OnInit {
                 id: cat.propertyName,
                 label: cat.propertyName,
                 placeholder: 'Enter ' + cat.propertyName,
-                value: subCategoryName,
-                validators: {
-                  required: null
-                }, 
-                errorMessages: {
-                  required: "{{ label }} is required"
-                }
-              })
+                value: subCategoryName
+              }),
             )
           } else if (cat.propertyName === 'status') {
             this.SAMPLE_FORM_MODEL[0].group.push(
@@ -311,7 +297,7 @@ export class AddAssetsComponent implements OnInit {
               label: cat.propertyName,
               placeholder: 'Enter ' + cat.propertyName,
               multiple: true,
-              value: [],
+              value: "",
               validators: {
                 required: null,
               }, 
@@ -418,17 +404,21 @@ export class AddAssetsComponent implements OnInit {
             specProperties[0].group.push(
               new DynamicCheckboxModel({
                 id: cat.propertyName,
-                label: cat.propertyName
+                label: cat.propertyName,
+                validators: {
+                  required: null
+                }, 
+                errorMessages: {
+                  required: "{{ label }} is required"
+                }
               })
             )
           }
         }
       });
-    
       this.SAMPLE_FORM_MODEL[0].group.sort(function(a,b){
         return a.name == "dimensions" ? 1 : 0
       });
-
       this.SAMPLE_FORM_MODEL[0].group.sort(function(a,b){
         return a.name == "specificProperties" ? 1 : 0
       });
@@ -438,11 +428,42 @@ export class AddAssetsComponent implements OnInit {
       this.formGroup = this.formService.createFormGroup(this.formModel);
     });
   }
-
-  onSave(){
+   onSave(){
     if(!this.formGroup.valid){
+      // this.router.navigate(['/addAsset']);
+      // this.flashMessages.show("Validate the Form", {cssClass: 'alert-danger', timeout: 3000});
+      let asset: any = this.formGroup.value.bootstrapFormGroup2;
+      let errors: any[] = [];
+
+      for(let val in asset){
+        // if(asset[val] != ""){
+        //   console.log(asset[val]);
+        // }
+        if(asset[val] == ""){
+          // this.router.navigate(['/addAsset']);
+          // this.flashMessages.show("Enter " + val, {cssClass: 'alert-danger', timeout: 5000});
+          errors.push(val);
+        } 
+
+        for (var prop in asset[val]) {
+          if(asset[val][prop] == ""){
+            // this.router.navigate(['/addAsset']);
+            // this.flashMessages.show("Enter " + prop, {cssClass: 'alert-danger', timeout: 5000});  
+            errors.push(prop);
+          }
+
+          for (var key in asset[val][prop]) {
+            if(asset[val][prop][key] !== "" && typeof asset[val][prop][key] !== "string"){
+              // this.router.navigate(['/addAsset']);
+              // this.flashMessages.show("Enter "  + key, {cssClass: 'alert-danger', timeout: 5000});  
+              errors.push(prop);
+            }
+          }
+        }
+      }
+
       this.router.navigate(['/addAsset']);
-      this.flashMessages.show("Validate the Form", {cssClass: 'alert-danger', timeout: 3000});
+      this.flashMessages.show(`Enter ${errors.join()}`, {cssClass: 'alert-danger', timeout: 5000});  
     } else {
       let asset: any = this.formGroup.value.bootstrapFormGroup2;
 
@@ -465,7 +486,6 @@ export class AddAssetsComponent implements OnInit {
               asset.specificProperties[k] = asset.specificProperties[k]
             }
         }
-
         this.assetService.addAsset(asset).subscribe(asset => {
           console.log(asset);
           this.router.navigate(['/']);

@@ -17,7 +17,7 @@ import { MapComponent } from './components/map/map.component';
 import { CategoriesService } from './services/categories.service';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { BsDropdownModule } from 'ngx-bootstrap';
-import { MatButtonModule, MatCheckboxModule, MatTableModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatTableModule, MatFormFieldModule, MatInputModule, MatPaginatorModule, MatCardModule, MatSortModule } from '@angular/material';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { ListCategoriesComponent } from './components/list-categories/list-categories.component';
@@ -65,6 +65,7 @@ const appRoutes: Routes = [
     NoopAnimationsModule,
     MatPaginatorModule,
     MatCardModule,
+    MatSortModule,
     FlashMessagesModule.forRoot(),
     ReactiveFormsModule,
     DynamicFormsCoreModule.forRoot(),

@@ -52,6 +52,7 @@ export class MapComponent implements OnInit {
             <div align='center'>
               <p style='font-size:15px'>Asset Name: ${asset.name}</p>
               <p style='font-size:15px'>Asset Status: ${asset.assetStatus}</p>
+   
             </div>
           `)
           )

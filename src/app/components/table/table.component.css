@@ -20,4 +20,10 @@
     margin-bottom: 10px;
   }
   
- 
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  .displayNone{
+    display: none;
+  }

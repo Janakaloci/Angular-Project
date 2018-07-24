@@ -81,7 +81,13 @@ export class AddCategoryComponent implements OnInit {
               id: "parent",
               label: "Select Parent",
               options: of(this.categoryNames),
-              value: ""
+              value: "",
+              validators: {
+                required: null
+              },
+              errorMessages: {
+                required: "{{ label }} is required"
+              }
             }),
             new DynamicFormArrayModel({
               id: 'properties',
@@ -130,12 +136,10 @@ export class AddCategoryComponent implements OnInit {
                     ]),
                     value: "",
                     validators: {
-                      required: null,
-                      minLength: 1
+                      required: null
                     },
                     errorMessages: {
-                      required: "{{ label }} is required",
-                      maxLength: "Select One"
+                      required: "{{ label }} is required"
                     }
                   }),
                   new DynamicCheckboxModel({
@@ -170,7 +174,13 @@ export class AddCategoryComponent implements OnInit {
                                 value: "boolean"
                             }
                         ]),
-                        value: ""
+                        value: "",
+                        validators: {
+                          required: null
+                        },
+                        errorMessages: {
+                          required: "{{ label }} is required"
+                        }
                       }),
                       new DynamicInputModel({
                         id: 'pattern',
@@ -207,7 +217,13 @@ export class AddCategoryComponent implements OnInit {
                                 value: "NAME"
                             }
                         ]),
-                        value: ""
+                        value: "",
+                        validators: {
+                          required: null
+                        },
+                        errorMessages: {
+                          required: "{{ label }} is required"
+                        }
                       }),
                     ]
                   })
@@ -220,7 +236,6 @@ export class AddCategoryComponent implements OnInit {
       this.formModel = this.SAMPLE_FORM_MODEL;
 
       this.formGroup = this.formService.createFormGroup(this.formModel);
-      console.log(this.formGroup.value);
 
       this.arrayControl = this.formGroup.get("bootstrapFormGroup1").get("properties") as FormArray;
       this.arrayModel = this.formService.findById("properties", this.formModel) as DynamicFormArrayModel;
@@ -245,8 +260,53 @@ export class AddCategoryComponent implements OnInit {
 
   onSave(){
     if(!this.formGroup.valid){
-        this.router.navigate(['/addCategory']);
-        this.flashMessages.show("Validate the Form", {cssClass: 'alert-danger', timeout: 3000});
+        let category: any = this.formGroup.value;
+        let errors: any[] = [];
+
+        for(let cat in category.bootstrapFormGroup1){
+          if(cat == "parent"){
+            category.bootstrapFormGroup1.parent = "s";
+          }
+
+          for (var prop in category.bootstrapFormGroup1[cat]) {
+            for(var key in category.bootstrapFormGroup1[cat][prop]){
+              if(key == "required"){
+                category.bootstrapFormGroup1.properties.map(prop => {
+                  prop.required = true;
+                })
+              }
+            }
+          }
+          if(category.bootstrapFormGroup1[cat] == ""){
+            // this.router.navigate(['/addCategory']);
+            // this.flashMessages.show("Enter " + cat, {cssClass: 'alert-danger', timeout: 5000});
+            errors.push(cat);
+          } 
+          for (var prop in category.bootstrapFormGroup1[cat]) {
+            if(category.bootstrapFormGroup1[cat][prop] == ""){
+              // this.router.navigate(['/addCategory']);
+              // this.flashMessages.show("Enter " + prop, {cssClass: 'alert-danger', timeout: 5000});  
+              errors.push(prop);
+            }
+
+            for(var key in category.bootstrapFormGroup1[cat][prop]){
+              if(category.bootstrapFormGroup1[cat][prop][key] == ""){
+                // this.router.navigate(['/addCategory']);
+                // this.flashMessages.show("Enter " + key, {cssClass: 'alert-danger', timeout: 5000});  
+                errors.push(key);
+              }
+              for(var val in category.bootstrapFormGroup1[cat][prop][key]){
+                if(category.bootstrapFormGroup1[cat][prop][key][val] == ""){
+                  // this.router.navigate(['/addCategory']);
+                  // this.flashMessages.show("Enter " + val , {cssClass: 'alert-danger', timeout: 5000});  
+                  errors.push(val);
+                }
+              }
+            }
+          }
+        }
+      this.router.navigate(['/addCategory']);
+      this.flashMessages.show(`Enter ${errors.join()}` , {cssClass: 'alert-danger', timeout: 5000});  
     } else {
       let category: any = this.formGroup.value;
 
@@ -258,18 +318,18 @@ export class AddCategoryComponent implements OnInit {
 
       properties.map(prop => {
         prop.validation = null;
-      })
+      });
 
-      this.categoriesService.addCategory(category.bootstrapFormGroup1).subscribe(categoryNew => {
-        console.log(categoryNew);
-        if(categoryNew.id){
-          this.flashMessages.show("Category Adedd", {cssClass: 'alert-success', timeout: 3000});
-          this.router.navigate(['/addAsset'])
-        } else {
-          this.flashMessages.show("Error adding", {cssClass: 'alert-danger', timeout: 3000});
-          this.router.navigate(['/addCategory'])
-        }
-      })
+      // this.categoriesService.addCategory(category.bootstrapFormGroup1).subscribe(categoryNew => {
+      //   console.log(categoryNew);
+      //   // if(categoryNew.id){
+      //   //   this.flashMessages.show("Category Adedd", {cssClass: 'alert-success', timeout: 3000});
+      //   //   this.router.navigate(['/addAsset'])
+      //   // } else {
+      //   //   this.flashMessages.show("Category alredy exist", {cssClass: 'alert-danger', timeout: 3000});
+      //   //   this.router.navigate(['/addCategory'])
+      //   // }
+      // })
     }
   }
 }

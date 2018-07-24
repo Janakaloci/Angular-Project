@@ -444,13 +444,13 @@ export class AssetEditComponent implements OnInit, AfterViewInit {
     } else {
       let asset: any = this.formGroup.value.bootstrapFormGroup3;
 
-      this.assetsService.updateAsset(asset).subscribe(asset => {
-        console.log(asset);
-        this.router.navigate(['/']);
-        this.flashMessages.show("Asset Added", {cssClass: 'alert-success', timeout: 3000});
-      }, err => {
-        this.flashMessages.show(err, {cssClass: 'alert-success', timeout: 3000});
-      })
+      // this.assetsService.updateAsset(asset).subscribe(asset => {
+      //   console.log(asset);
+      //   this.router.navigate(['/']);
+      //   this.flashMessages.show("Asset Added", {cssClass: 'alert-success', timeout: 3000});
+      // }, err => {
+      //   this.flashMessages.show(err, {cssClass: 'alert-success', timeout: 3000});
+      // })
     }
   }
 }

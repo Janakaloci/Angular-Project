@@ -27,8 +27,15 @@ export class AssetsService {
       return res;
     })
   }
-  updateAsset(asset: any){
-    return this.http.put(`http://street-asset-manager-api.herokuapp.com/assets`, asset).map(res => {
+  updateAsset(assetStatus: String, id: String){
+    let headers = new HttpHeaders();
+    headers.append('Content-Type' , 'application/x-www-form-urlencoded');
+    headers.append('Access-Control-Allow-Origin','*');
+    
+    let body = `assetId=${id}&newStatus=${assetStatus}`;
+
+
+    return this.http.put(`https://asset-service.herokuapp.com/assets/update/status?${body}`, {headers: headers}).map(res => {
       return res;
     })
   }

@@ -27,7 +27,7 @@
 
     <div class="container">
         <form *ngIf="formGroup" class="form-horizontal" [formGroup]="formGroup" (ngSubmit)="onSave()">
-            <dynamic-bootstrap-form [model]="formModel" [layout]="formLayout" [group]="formGroup">
+            <dynamic-bootstrap-form [model]="formModel" [layout]="formLayout" [group]="formGroup" >
             </dynamic-bootstrap-form>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>

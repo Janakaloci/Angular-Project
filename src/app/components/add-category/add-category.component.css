@@ -4,3 +4,8 @@
     top: 57% !important;
     transform: translateY(0px) !important;
 }
+
+.errorMessage {
+    padding: 10px;
+    margin:10px;
+}
